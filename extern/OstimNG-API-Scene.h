@@ -9,7 +9,8 @@ namespace OstimNG_API::Scene
         V1
 
     };
-
+    
+    
     enum class APIResult : uint8_t
     {
         // Scene successfully started
@@ -24,19 +25,19 @@ namespace OstimNG_API::Scene
     class ISceneInterface
     {
         public:
+        
             /// @brief
             /// Start a scene with optionally specified furniture reference.
             /// @return
             [[nodiscard]] virtual APIResult StartScene(std::string_view pluginName, RE::TESObjectREFR* furniture,
-                                                       std::string startingAnimation, std::vector<RE::Actor*> actors,
-                                                       int& outThreadID) noexcept = 0;
+                                                       const std::string& startingAnimation, std::vector<RE::Actor*> actors, int* threadID) noexcept = 0;
 
 
             /// @brief 
             /// Start a scene with nearest found furniture, if any. 
             /// @return 
-            [[nodiscard]] virtual APIResult StartScene(std::string_view pluginName, std::string startingAnimation,
-                                                       std::vector<RE::Actor*> actors, int& outThreadID) noexcept = 0;
+            [[nodiscard]] virtual APIResult StartScene(std::string_view pluginName, const std::string& startingAnimation,
+                                                       std::vector<RE::Actor*> actors, int* threadID) noexcept = 0;
 
             /// @brief 
             /// Stop the specified scene.
@@ -48,10 +49,9 @@ namespace OstimNG_API::Scene
             [[nodiscard]] virtual APIResult SetAutoMode(std::string_view pluginName, int threadID,
                                                         bool autoMode) noexcept = 0;
 
-            [[nodiscard]] virtual APIResult TryGetMetadata(std::string_view pluginName, int threadID,
-                                                           std::vector<std::string>& tags) noexcept = 0;
+
             [[nodiscard]] virtual APIResult TryGetAutoMode(std::string_view pluginName, int threadID,
-                                                           bool& autoMode) noexcept = 0; 
+                                                           bool* autoMode) noexcept = 0; 
         
         
     };
