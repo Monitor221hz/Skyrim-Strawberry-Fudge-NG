@@ -1,6 +1,9 @@
 #include "log.h"
+#include "hook.h"
+#include "event.h"
+#include "configmanager.h"
 #include "../extern/OstimNG-API-Scene.h"
-
+using namespace StrawberryFudge; 
 void OnDataLoaded()
 {
    
@@ -10,10 +13,11 @@ void MessageHandler(SKSE::MessagingInterface::Message* a_msg)
 {
 	switch (a_msg->type) {
 	case SKSE::MessagingInterface::kDataLoaded:
-        
+        QuestEventHandler::Register(); 
+		StageEventHandler::Register(); 
+		ConfigManager::LoadAllConfigs();  
 		break;
 	case SKSE::MessagingInterface::kPostLoad:
-
 		break;
 	case SKSE::MessagingInterface::kPreLoadGame:
 		break;
@@ -42,5 +46,7 @@ SKSEPluginLoad(const SKSE::LoadInterface *skse) {
 	{
 		SKSE::log::info("Failed to acquire Ostim API"); 
 	}
+	StrawberryFudge::Hook::InstallDialogueHook(); 
+	
     return true;
 }
