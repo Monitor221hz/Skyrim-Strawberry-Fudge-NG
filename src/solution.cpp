@@ -22,15 +22,12 @@ namespace StrawberryFudge
         SKSE::log::info("Player character {:X}", PlayerCharacter::GetSingleton()->GetFormID()); 
         std::string animation = AnimationSource ? AnimationSource->GetAnimation() : "";  
         TESObjectREFR* furniture = FurnitureSource ? FurnitureSource->GetFurniture() : nullptr; 
-        // msQ->AddMessage(DialogueMenu::MENU_NAME, UI_MESSAGE_TYPE::kHide, nullptr); 
 
-        // auto* hulda = TESForm::LookupByID(0x1A66E)->As<Actor>(); 
 
         int numActors = actors.size(); 
 
         constexpr const char* pluginName = "Strawberry Fudge"; 
-        // Actor* actorArray[256]; 
-        // std::copy(actors.begin(), actors.end(), actorArray); 
+
         SKSE::log::info("Trying to start solution"); 
         
         auto* api = OstimNG_API::Scene::GetAPI(); 

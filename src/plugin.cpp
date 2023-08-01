@@ -48,9 +48,9 @@ SKSEPluginLoad(const SKSE::LoadInterface *skse) {
 	{
 		SKSE::log::info("Failed to acquire Ostim API"); 
 	}
-	// if (skse->RuntimeVersion() == SKSE::RUNTIME_SSE_LATEST_SE) Hook::InstallVoiceFileHook(); 
+
 	StrawberryFudge::Hook::InstallDialogueHook(); 
-	// StrawberryFudge::Hook::InstallResponseHook(); 
+
 	
     return true;
 }
