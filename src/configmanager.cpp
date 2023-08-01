@@ -43,9 +43,9 @@ namespace StrawberryFudge
             std::ifstream reader;
             reader.open(path);
             nlohmann::json configData; 
-            reader >> configData; 
             try 
             {
+                reader >> configData; 
                 ParseSolution(configData); 
             }
             catch(...)
