@@ -13,8 +13,7 @@ namespace StrawberryFudge
                 continue;
             auto *refr = handle->second.get().get();
 
-            if (!refr || refr->GetFormType() != FormType::ActorCharacter)
-                continue;
+            if (!refr || refr->GetBaseObject()->GetFormType() != FormType::NPC) continue;
 
             actors.emplace_back(refr->As<Actor>());
         }
@@ -75,8 +74,10 @@ namespace StrawberryFudge
         for (auto *alias : owningQuest->aliases)
         {
             std::string aliasName = alias->aliasName.c_str();
-            if (aliasName == name)
-                return alias;
+            SKSE::log::info("Checking alias {}", aliasName) ;
+            if (aliasName != name) continue;
+            SKSE::log::info("Alias {} loaded", aliasName);
+            return alias;
         }
         return nullptr;
     }
