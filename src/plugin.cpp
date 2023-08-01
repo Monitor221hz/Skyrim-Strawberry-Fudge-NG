@@ -16,12 +16,14 @@ void MessageHandler(SKSE::MessagingInterface::Message* a_msg)
         QuestEventHandler::Register(); 
 		StageEventHandler::Register(); 
 		ConfigManager::LoadAllConfigs();  
+		
 		break;
 	case SKSE::MessagingInterface::kPostLoad:
 		break;
 	case SKSE::MessagingInterface::kPreLoadGame:
 		break;
 	case SKSE::MessagingInterface::kPostLoadGame:
+
         break;
 	case SKSE::MessagingInterface::kNewGame:
 		break;
@@ -46,7 +48,9 @@ SKSEPluginLoad(const SKSE::LoadInterface *skse) {
 	{
 		SKSE::log::info("Failed to acquire Ostim API"); 
 	}
+	// if (skse->RuntimeVersion() == SKSE::RUNTIME_SSE_LATEST_SE) Hook::InstallVoiceFileHook(); 
 	StrawberryFudge::Hook::InstallDialogueHook(); 
+	// StrawberryFudge::Hook::InstallResponseHook(); 
 	
     return true;
 }
