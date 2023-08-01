@@ -11,5 +11,6 @@ set(headers ${headers}
     src/configmanager.h
     src/scenesources/actor/referencesource.h
     src/scenesources/actor/aliassource.h
+    src/scenesources/furniture/aliassource.h
     extern/OstimNG-API-Scene.h 
 )
