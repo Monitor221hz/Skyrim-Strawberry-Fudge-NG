@@ -358,6 +358,22 @@ namespace FormUtil
 
 
     };
+
+    struct Quest 
+    {
+        public:
+            static BGSBaseAlias *FindAliasByName(std::string_view name, TESQuest *owningQuest)
+            {
+                RE::BSWriteLockGuard AliasLock{owningQuest->aliasAccessLock};
+                for (auto *alias : owningQuest->aliases)
+                {
+                std::string aliasName = alias->aliasName.c_str();
+                if (aliasName == name)
+                    return alias;
+                }
+                return nullptr;
+            }
+    };
 }
 namespace NifUtil
 {
