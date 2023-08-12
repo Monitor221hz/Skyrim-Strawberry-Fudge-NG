@@ -23,6 +23,7 @@ namespace StrawberryFudge
 
         static void LoadAllConfigs()
         {
+            LoadStaticConfigs(); 
             LoadActorSourceConfigs(); 
             LoadSolutionConfigs(); 
 
@@ -31,6 +32,9 @@ namespace StrawberryFudge
 
         private: 
 
+        static void LoadStaticConfigs(); 
+
+    
         static void LoadActorSourceConfigs(); 
 
         static void LoadSolutionConfigs(); 

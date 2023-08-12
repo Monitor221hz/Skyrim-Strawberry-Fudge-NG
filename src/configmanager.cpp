@@ -1,9 +1,13 @@
 #include "configmanager.h"
 #include "hook.h"
-
+#include "scenesources\actor\speakersource.h"
 
 namespace StrawberryFudge 
 {
+    void ConfigManager::LoadStaticConfigs()
+    {
+        actorSourceLookup.emplace("CurrentSpeaker", SpeakerActorSource());
+    }
 
     void ConfigManager::LoadActorSourceConfigs()
     {
