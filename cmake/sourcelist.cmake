@@ -7,6 +7,7 @@ set(sources ${sources}
     src/scenesources/actor/referencesource.cpp
     src/scenesources/actor/aliassource.cpp
     src/scenesources/actor/speakersource.cpp
+    src/scenesources/actor/playersource.cpp
     src/scenesources/furniture/aliassource.cpp
     extern/OstimNG-API-Scene.cpp 
 )
