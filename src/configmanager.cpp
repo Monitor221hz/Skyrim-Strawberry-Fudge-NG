@@ -1,14 +1,9 @@
 #include "configmanager.h"
 #include "hook.h"
-#include "scenesources\actor\speakersource.h"
-#include "scenesources\actor\playersource.h"
+
 namespace StrawberryFudge 
 {
-    void ConfigManager::LoadStaticConfigs()
-    {
-        actorSourceLookup.emplace("SpeakerSource", SpeakerActorSource());
-        actorSourceLookup.emplace("PlayerSource", PlayerSource()); 
-    }
+
 
     void ConfigManager::LoadActorSourceConfigs()
     {
@@ -94,6 +89,8 @@ namespace StrawberryFudge
         // if (!json.contains("name") || !json["name"].is_string() || !json.contains("trigger") || !json["trigger"].is_string()) return; 
         for(auto& jsonObject : json)
         {
+            SceneFurnitureSource* furnitureSource = nullptr; 
+            SceneAnimationSource* animationSource = nullptr;
             std::vector<SceneActorSource *> actorSources;
             // SceneFurnitureSource* furnitureSource;
             // SceneAnimationSource* animationSource;
@@ -109,14 +106,19 @@ namespace StrawberryFudge
                 actorSources.emplace_back(actorSourceLookup[name]);
             }
 
-            auto *triggerForm = FormUtil::Form::GetFormFromConfigString(jsonObject["trigger"]);
+            auto *triggerForm = FormUtil::Parse::GetFormFromConfigString(jsonObject["trigger"]);
+
+            if (jsonObject.contains("animation") && jsonObject["animation"].is_string())
+            {
+                animationSource= &(nameAnimationSources.emplace_back(NameAnimationSource(jsonObject["animation"])));
+            }
 
             switch (triggerForm->GetFormType())
             {
             case (FormType::Info):
             {
                 auto *topicInfo = triggerForm->As<TESTopicInfo>();
-                auto *solutionPtr = &solutions.emplace_back(Solution(actorSources, nullptr, nullptr));
+                auto *solutionPtr = &solutions.emplace_back(Solution(actorSources, animationSource, furnitureSource));
                 Hook::TopicInfoSolutions.emplace(topicInfo, solutionPtr);
             }
             break;
@@ -124,7 +126,7 @@ namespace StrawberryFudge
             case (FormType::Dialogue):
             {
                 auto *topic = triggerForm->As<TESTopic>();
-                auto *solutionPtr = &solutions.emplace_back(Solution(actorSources, nullptr, nullptr));
+                auto *solutionPtr = &solutions.emplace_back(Solution(actorSources, animationSource, furnitureSource));
                 Hook::TopicSolutions.emplace(topic, solutionPtr);
             }
             break;

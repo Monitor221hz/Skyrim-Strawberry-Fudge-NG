@@ -32,7 +32,7 @@ namespace StrawberryFudge
         {
             try 
             {
-                auto* actor = FormUtil::Form::GetFormFromConfigString(str)->As<Actor>(); 
+                auto* actor = FormUtil::Parse::GetFormFromConfigString(str)->As<Actor>(); 
                 SKSE::log::info("Actor Reference {} loaded from entry {}", actor->GetName(), str); 
                 if (actor) Actors.emplace_back(actor); 
             }

@@ -6,7 +6,7 @@
 
 namespace StrawberryFudge
 {
-    class PlayerSource : SceneActorSource
+    class PlayerSource : public SceneActorSource
     {
     public:
         void GetActors(std::vector<Actor *> &actors) override;

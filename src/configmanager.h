@@ -12,6 +12,9 @@
 
 #include "scenesources/actor/aliassource.h"
 #include "scenesources/actor/referencesource.h"
+#include "scenesources/actor/speakersource.h"
+#include "scenesources/actor/playersource.h"
+#include "scenesources/animation/namesource.h"
 
 namespace StrawberryFudge 
 {
@@ -30,11 +33,9 @@ namespace StrawberryFudge
             SKSE::log::info("Found {} Source Files and {} Solutions", actorSourceLookup.size(), solutions.size()); 
         }
 
-        private: 
+        private:
 
-        static void LoadStaticConfigs(); 
 
-    
         static void LoadActorSourceConfigs(); 
 
         static void LoadSolutionConfigs(); 
@@ -47,13 +48,25 @@ namespace StrawberryFudge
         static inline std::unordered_map<std::string, SceneActorSource*> actorSourceLookup; 
 
 
+
+        static inline PlayerSource playerSource; 
+        static inline SpeakerActorSource speakerSource; 
+
+
+        static inline std::vector<NameAnimationSource> nameAnimationSources; 
+
         static inline std::vector<AliasActorSource> aliasActorSources; 
         static inline std::vector<ReferenceActorSource> defaultActorSources; 
         
-        static inline std::vector<Solution> solutions; 
 
         
+        static inline std::vector<Solution> solutions;
 
+        static void LoadStaticConfigs()
+        {
+            actorSourceLookup.emplace("SpeakerSource", (&speakerSource));
+            actorSourceLookup.emplace("PlayerSource", (&playerSource));
+        }
     };
 
 

@@ -40,6 +40,8 @@ namespace StrawberryFudge
 
         switch (numActors)
         {
+            case 1: 
+            break;
             case 2: 
             result = api->StartCoupleScene(pluginName, furniture, animation.c_str(), actors[0], actors[1], &threadID);
             break;

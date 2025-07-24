@@ -13,6 +13,6 @@ set(headers ${headers}
     src/scenesources/actor/aliassource.h
     src/scenesources/actor/speakersource.h
     src/scenesources/actor/playersource.h
-    src/scenesources/furniture/aliassource.h
+    src/scenesources/animation/namesource.h
     extern/OstimNG-API-Scene.h 
 )

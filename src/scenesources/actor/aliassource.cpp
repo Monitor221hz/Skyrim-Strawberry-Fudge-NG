@@ -27,7 +27,7 @@ namespace StrawberryFudge
     {
         try 
         {
-            owningQuest = FormUtil::Form::GetFormFromConfigString(raw[0])->As<TESQuest>();
+            owningQuest = FormUtil::Parse::GetFormFromConfigString(raw[0])->As<TESQuest>();
             SKSE::log::info("Quest {} loaded from entry {}", owningQuest->GetName(), raw[0]); 
             if (!owningQuest) throw; 
 
